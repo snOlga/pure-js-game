@@ -28,6 +28,8 @@ async function move(newX, isRightDirection) {
     const oldX = getLeftComputedStyle(LOCATION_ID) + getLeftComputedStyle(CHARACTER_ID)
     const newLocationX = getLeftComputedStyle(LOCATION_ID) + newX
 
+    preventDeadZoneLocation()
+
     for (let movement = oldX;
         isRightDirection && movement <= newLocationX ||
         !isRightDirection && movement > newLocationX;
@@ -41,7 +43,6 @@ async function move(newX, isRightDirection) {
         else
             setLeftStyle(LOCATION_ID, leftLocationPosition - 1 * (isRightDirection ? 1 : -1))
 
-        preventDeadZoneLocation()
         await sleep(SPEED)
     }
 }
